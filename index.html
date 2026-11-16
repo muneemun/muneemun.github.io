@@ -3,210 +3,694 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muni Studio - Mobile App Lab</title>
+    <title>Muni Studio — Weave Order into Your Daily Rhythm</title>
+    <meta name="description" content="Muni Studio creates intuitive, minimalist mobile applications designed to bring clarity and rhythm to daily life.">
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1a1a1a;
-            --text-primary: #f0f0f0;
-            --text-secondary: #999999;
-            --accent-color: #ffffff;
-            --border-color: #2a2a2a;
+            --bg-main: #FFFFFF;
+            --bg-subtle: #F8F9FC;
+            --card-bg: #FFFFFF;
+            --text-primary: #0F1115;
+            --text-secondary: #5A6270;
+            --text-muted: #8B95A1;
+            --border-color: #E5E8EB;
+            --brand-blue: #2C62FF;
+            --brand-royal: #1D3FE8;
+            --brand-violet: #7928E8;
+            --brand-gradient: linear-gradient(135deg, #2C62FF 0%, #1D3FE8 45%, #7928E8 100%);
+            --shadow-sm: 0 2px 8px rgba(15, 17, 21, 0.04);
+            --shadow-md: 0 12px 28px rgba(29, 63, 232, 0.08);
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-main);
             color: var(--text-primary);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
         }
-        .container {
-            max-width: 800px;
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-inner {
+            max-width: 960px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--brand-blue);
+        }
+
+        /* Container */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
         header {
             text-align: center;
-            padding: 40px 0 60px 0;
+            padding: 80px 0 72px 0;
             border-bottom: 1px solid var(--border-color);
         }
-        .logo-box {
+
+        .brand-emblem {
+            width: 84px;
+            height: 84px;
+            margin: 0 auto 24px auto;
+            border-radius: 22px;
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(44, 98, 255, 0.14), 0 0 0 1px rgba(44, 98, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .studio-badge {
             display: inline-block;
-            border: 2px solid var(--accent-color);
-            padding: 24px 48px;
-            margin-bottom: 24px;
-            border-radius: 12px;
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            letter-spacing: -0.5px;
-        }
-        header p {
-            margin: 12px 0 0 0;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            letter-spacing: 1px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
+            color: var(--brand-blue);
+            background: rgba(44, 98, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
         }
+
+        header h1 {
+            margin: 0 0 16px 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        header h1 span {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p.subtitle {
+            max-width: 600px;
+            margin: 0 auto 32px auto;
+            font-size: 1.08rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--brand-gradient);
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 13px 24px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(44, 98, 255, 0.24);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(44, 98, 255, 0.32);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-subtle);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 13px 24px;
+            border-radius: 12px;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #F0F2F7;
+            border-color: #D0D5DD;
+        }
+
+        /* Section Common */
         section {
-            padding: 50px 0;
+            padding: 72px 0;
             border-bottom: 1px solid var(--border-color);
         }
+
         section:last-of-type {
             border-bottom: none;
         }
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 24px;
-            color: var(--accent-color);
-            font-weight: 600;
+
+        .section-header {
+            margin-bottom: 36px;
         }
-        p {
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--brand-blue);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .section-desc {
+            margin: 0;
             color: var(--text-secondary);
             font-size: 1rem;
-            line-height: 1.7;
+            max-width: 640px;
         }
-        /* 프로젝트 그리드 레이아웃 */
+
+        /* Philosophy Grid */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .philosophy-card {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .philosophy-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--brand-blue);
+            font-weight: 700;
+        }
+
+        .philosophy-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.08rem;
+            font-weight: 700;
+        }
+
+        .philosophy-card p {
+            margin: 0;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        /* Apps Portfolio Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            margin-top: 25px;
         }
+
         .project-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            transition: border-color 0.2s ease, transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
+
         .project-card:hover {
-            border-color: #444444;
-            transform: translateY(-2px);
+            border-color: rgba(44, 98, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
-        /* 이미지 상단 배치 및 비율 유지 */
+
         .project-thumbnail {
             width: 100%;
-            height: 180px;
-            background-color: #222;
+            height: 210px;
+            position: relative;
             overflow: hidden;
             border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         .project-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-        .project-info {
-            padding: 20px;
-        }
-        .project-info h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-        }
-        .project-info p {
-            margin: 0;
-            font-size: 0.95rem;
-        }
-        .contact-info {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-        }
-        .contact-info ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .contact-info li {
-            padding: 10px 0;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-        .contact-info li:last-child {
-            border-bottom: none;
-        }
-        .contact-info li strong {
-            color: var(--text-primary);
-            display: inline-block;
-            width: 160px;
-        }
-        .contact-info a {
-            color: #61afef;
-            text-decoration: none;
-        }
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 40px 0 20px 0;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+
+        .status-pill {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 11px;
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
         }
 
-        @media (max-width: 600px) {
-            .contact-info li strong {
-                display: block;
-                margin-bottom: 4px;
+        .status-live {
+            background: rgba(16, 185, 129, 0.14);
+            color: #047857;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-soon {
+            background: rgba(255, 255, 255, 0.88);
+            color: #475467;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .project-info {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-category {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--brand-blue);
+            margin-bottom: 4px;
+        }
+
+        .project-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .project-info p {
+            margin: 0 0 20px 0;
+            font-size: 0.94rem;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--brand-blue);
+            text-decoration: none;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-link.muted {
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* Contact Card */
+        .contact-card {
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+
+        .contact-item strong {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .contact-item span,
+        .contact-item a {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .contact-item a {
+            color: var(--brand-blue);
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-subtle);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 56px 0 48px 0;
+            }
+            header h1 {
+                font-size: 1.95rem;
+            }
+            .philosophy-grid,
+            .projects-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                gap: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="logo-box">
-                <h1>[ Muni Studio ]</h1>
+
+    <!-- Top Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="muniGradNav" x1="15" y1="85" x2="85" y2="15" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#2C62FF"/>
+                            <stop offset="48%" stop-color="#1D3FE8"/>
+                            <stop offset="100%" stop-color="#7928E8"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="100" height="100" rx="24" fill="url(#muniGradNav)"/>
+                    <path d="M26 70V36C26 30.4772 30.4772 26 36 26C39.8 26 43.2 28.1 44.9 31.5L50 41.5L55.1 31.5C56.8 28.1 60.2 26 64 26C69.5228 26 74 30.4772 74 36V70" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Muni Studio</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about">Philosophy</a>
+                <a href="#apps">Apps</a>
+                <a href="#contact">Contact</a>
             </div>
-            <p>Mobile App Lab</p>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header>
+            <div class="brand-emblem">
+                <!-- Muni Studio Signature Ribbon M Symbol -->
+                <svg width="56" height="56" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="muniGradHero" x1="15" y1="85" x2="85" y2="15" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#2C62FF"/>
+                            <stop offset="48%" stop-color="#1D3FE8"/>
+                            <stop offset="100%" stop-color="#7928E8"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M22 74V34C22 27.3726 27.3726 22 34 22C38.6 22 42.8 24.6 44.8 28.8L50 39.5L55.2 28.8C57.2 24.6 61.4 22 66 22C72.6274 22 78 27.3726 78 34V74" stroke="url(#muniGradHero)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 74V34C22 27.3726 27.3726 22 34 22C38.6 22 42.8 24.6 44.8 28.8L50 39.5L55.2 28.8C57.2 24.6 61.4 22 66 22C72.6274 22 78 27.3726 78 34V74" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.75"/>
+                </svg>
+            </div>
+            <span class="studio-badge">Mobile App Lab</span>
+            <h1>Weave Order into<br><span>Your Daily Rhythm</span></h1>
+            <p class="subtitle">
+                Muni Studio(무니스튜디오)는 '무늬 문(紋)'의 정신을 담아, 흩어진 일상의 시간·관계·공간·운동의 주기를 단정한 패턴으로 정돈하는 유틸리티 앱을 만듭니다.
+            </p>
+            <div class="hero-actions">
+                <a href="https://play.google.com/store/apps/dev?id=5841009832663155868" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    Google Play 스토어 방문하기 &rarr;
+                </a>
+                <a href="#apps" class="btn-secondary">
+                    서비스 앱 둘러보기
+                </a>
+            </div>
         </header>
 
-        <!-- About Section -->
-        <section>
-            <h2>About Muni Studio</h2>
-            <p>Muni Studio creates intuitive, minimalist mobile applications designed to bring clarity to daily life. We build utility and productivity tools focused on time tracking, scheduling, and personal relationship management.</p>
-        </section>
-
-        <!-- Upcoming Projects Section -->
-        <section>
-            <h2>Upcoming Projects</h2>
-            <div class="projects-grid">
-                <!-- Muni Timetable -->
-                <div class="project-card">
-                    <div class="project-thumbnail">
-                        <img src="Muni Stuido_files/unnamed.jpg" alt="Muni Timetable Preview">
-                    </div>
-                    <div class="project-info">
-                        <h3>Muni Timetable</h3>
-                        <p>An intuitive, grid-based routine and schedule organizer.</p>
-                    </div>
+        <!-- About / Philosophy Section -->
+        <section id="about">
+            <div class="section-header">
+                <span class="section-label">Philosophy</span>
+                <h2>일상의 결을 설계하는 원칙</h2>
+                <p class="section-desc">복잡한 기능을 덜어내고, 매일 손이 가는 직관적이고 안전한 도구를 만듭니다.</p>
+            </div>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">01</div>
+                    <h3>Pattern &amp; Rhythm</h3>
+                    <p>관계의 연락 주기, 주간 일정, 운동 인터벌, 생활 소모품 교체까지 반복되는 일상의 리듬을 시각화합니다.</p>
                 </div>
-                <!-- Muni Connections -->
-                <div class="project-card">
-                    <div class="project-thumbnail">
-                        <img src="Muni Stuido_files/unnamed.png" alt="Muni Connections Preview">
-                    </div>
-                    <div class="project-info">
-                        <h3>Muni Connections</h3>
-                        <p>A thoughtful personal relationship and contact management companion.</p>
-                    </div>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">02</div>
+                    <h3>Visual Clarity</h3>
+                    <p>설명서 없이도 한눈에 파악되는 궤도, 그리드, 타이머 링 인터페이스로 인지적 피로를 줄입니다.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">03</div>
+                    <h3>Privacy First</h3>
+                    <p>불필요한 회원가입이나 개인 데이터 수집을 지양하며, 사용자 기기 중심의 가볍고 쾌적한 환경을 지향합니다.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Contact & Support Section -->
-        <section>
-            <h2>Contact & Support</h2>
-            <div class="contact-info">
-                <ul>
-                    <li><strong>Studio / Legal Entity:</strong> Muni Studio (무니스튜디오)</li>
-                    <li><strong>Contact Email:</strong> <a href="mailto:munistudio.dev
+        <!-- Apps Portfolio Section -->
+        <section id="apps">
+            <div class="section-header">
+                <span class="section-label">Portfolio</span>
+                <h2>Applications</h2>
+                <p class="section-desc">현재 Google Play에서 서비스 중인 앱과 곧 출시될 새로운 유틸리티 라인업입니다.</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- 1. Social Orbit -->
+                <article class="project-card">
+                    <div class="project-thumbnail" style="background: linear-gradient(135deg, #EEF2FF 0%, #F3E8FF 100%);">
+                        <span class="status-pill status-live">Google Play 출시</span>
+                        <!-- 실제 스크린샷 적용 시 아래 img 태그를 활성화하고 svg를 지우세요 -->
+                        <!-- <img src="images/social-orbit.png" alt="소셜 오르빗 미리보기"> -->
+                        <svg width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="110" cy="70" r="56" stroke="#2C62FF" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="4 4"/>
+                            <circle cx="110" cy="70" r="36" stroke="#7928E8" stroke-opacity="0.3" stroke-width="1.5"/>
+                            <circle cx="110" cy="70" r="14" fill="url(#orbitCenter)"/>
+                            <circle cx="146" cy="70" r="7" fill="#2C62FF"/>
+                            <circle cx="82" cy="46" r="6" fill="#7928E8"/>
+                            <circle cx="128" cy="118" r="6" fill="#1D3FE8"/>
+                            <defs>
+                                <linearGradient id="orbitCenter" x1="96" y1="56" x2="124" y2="84" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#2C62FF"/><stop offset="1" stop-color="#7928E8"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">관계 주기 관리 · Relationship</span>
+                        <h3>소셜 오르빗 (Social Orbit)</h3>
+                        <p>소중한 사람들과의 연락 주기와 관계의 거리를 행성 궤도처럼 직관적으로 관리하는 퍼스널 관계 매니저입니다.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.munistudio.socialorbit" target="_blank" rel="noopener noreferrer" class="project-link">
+                            Google Play에서 보기 &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 2. Modu Timetable -->
+                <article class="project-card">
+                    <div class="project-thumbnail" style="background: linear-gradient(135deg, #ECFEFF 0%, #EFF6FF 100%);">
+                        <span class="status-pill status-live">Google Play 출시</span>
+                        <!-- 실제 스크린샷 적용 시 아래 img 태그를 활성화하고 svg를 지우세요 -->
+                        <!-- <img src="images/modu-timetable.jpg" alt="모두의 시간표 미리보기"> -->
+                        <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="35" y="18" width="130" height="94" rx="12" fill="white" stroke="#CBD5E1" stroke-width="1.5"/>
+                            <rect x="47" y="32" width="32" height="22" rx="6" fill="#3B82F6" fill-opacity="0.18"/>
+                            <rect x="84" y="32" width="32" height="36" rx="6" fill="#0EA5E9" fill-opacity="0.22"/>
+                            <rect x="121" y="32" width="32" height="28" rx="6" fill="#6366F1" fill-opacity="0.18"/>
+                            <rect x="47" y="60" width="32" height="38" rx="6" fill="#10B981" fill-opacity="0.18"/>
+                            <rect x="84" y="74" width="69" height="24" rx="6" fill="#3B82F6" fill-opacity="0.14"/>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">일정 및 루틴 · Productivity</span>
+                        <h3>모두의 시간표 (Modu Timetable)</h3>
+                        <p>누구나 손쉽게 주간 일정과 반복 루틴을 한눈에 설계하고 확인할 수 있는 깔끔한 그리드 기반 시간표 앱입니다.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.modu.timetable" target="_blank" rel="noopener noreferrer" class="project-link">
+                            Google Play에서 보기 &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 3. HomeCycle -->
+                <article class="project-card">
+                    <div class="project-thumbnail" style="background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);">
+                        <span class="status-pill status-soon">출시 준비 중</span>
+                        <!-- 실제 이미지 적용 시 아래 img 태그를 활성화하세요 -->
+                        <!-- <img src="images/homecycle.png" alt="홈사이클 미리보기"> -->
+                        <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M68 62L100 36L132 62V96C132 99.3137 129.314 102 126 102H74C70.6863 102 68 99.3137 68 96V62Z" fill="white" stroke="#10B981" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path d="M88 76C88 69.3726 93.3726 64 100 64C106.627 64 112 69.3726 112 76C112 82.6274 106.627 88 100 88" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M96 84L100 88L96 92" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">생활 소모품 주기 관리 · Lifestyle</span>
+                        <h3>홈사이클 (HomeCycle)</h3>
+                        <p>필터, 칫솔, 세제 등 집안 곳곳의 생활 소모품 잔여량과 교체 시기를 스마트하게 추적해 주는 살림 주기 트래커입니다.</p>
+                        <span class="project-link muted">Coming Soon</span>
+                    </div>
+                </article>
+
+                <!-- 4. TempoTimer -->
+                <article class="project-card">
+                    <div class="project-thumbnail" style="background: linear-gradient(135deg, #FFF7ED 0%, #FEF2F2 100%);">
+                        <span class="status-pill status-soon">출시 준비 중</span>
+                        <!-- 실제 이미지 적용 시 아래 img 태그를 활성화하세요 -->
+                        <!-- <img src="images/tempotimer.png" alt="템포타이머 미리보기"> -->
+                        <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="68" r="38" fill="white" stroke="#F97316" stroke-width="3"/>
+                            <path d="M100 30A38 38 0 1 1 65 83" stroke="#EA580C" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M100 50V68L112 75" stroke="#1E293B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="92" y="21" width="16" height="5" rx="2.5" fill="#F97316"/>
+                        </svg>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">인터벌 운동 타이머 · Health &amp; Fitness</span>
+                        <h3>템포타이머 (TempoTimer)</h3>
+                        <p>나만의 운동 루틴과 휴식 템포를 정교한 시퀀스로 설계하고 리듬감 있게 실행할 수 있는 커스텀 인터벌 타이머입니다.</p>
+                        <span class="project-link muted">Coming Soon</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Contact & Legal Info Section -->
+        <section id="contact">
+            <div class="section-header">
+                <span class="section-label">Contact &amp; Info</span>
+                <h2>Contact &amp; Support</h2>
+                <p class="section-desc">앱 이용 문의, 버그 제보, 협업 제안은 아래 공식 채널로 연락해 주세요.</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <strong>Studio / Legal Entity</strong>
+                        <span>Muni Studio (무니스튜디오)</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Official Store</strong>
+                        <a href="https://play.google.com/store/apps/dev?id=5841009832663155868" target="_blank" rel="noopener noreferrer">Google Play Developer Page</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Customer Support (CS)</strong>
+                        <a href="mailto:support.munistudio@gmail.com">support.munistudio@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Business &amp; Inquiries</strong>
+                        <a href="mailto:munistudio.official@gmail.com">munistudio.official@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Muni Studio</strong> — Weave Order into Your Daily Rhythm</p>
+        <p>&copy; 2026 Muni Studio. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
